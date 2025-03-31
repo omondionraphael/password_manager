@@ -1,0 +1,231 @@
+{% load static tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Cryptix | Dashboard{% endblock %}</title>
+    {% tailwind_css %}
+  </head>
+  <body class="bg-gray-100 min-h-screen">
+    <div class="flex h-screen">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="bg-gray-800 text-white w-64 transform sm:translate-x-0 sm:relative absolute -translate-x-full h-full transition-transform duration-300">
+      <!-- Branding -->
+      <div class="h-16 flex items-center justify-center text-2xl font-bold border-b border-gray-700">
+        Cryptix
+      </div>
+      <!-- Navigation Menu -->
+      <nav class="p-4 space-y-2">
+        <!-- Dashboard -->
+        <a href="{% url 'dashboard:home' %}" class="flex items-center p-2 rounded hover:bg-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6" />
+          </svg>
+          Dashboard
+        </a>
+        <!-- New Password -->
+        <a href="{% url 'dashboard:add_password' %}" class="flex items-center p-2 rounded hover:bg-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+          New Password
+        </a>
+        <!-- Categories -->
+        <a href="{% url 'dashboard:categories' %}" class="flex items-center p-2 rounded hover:bg-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          Categories
+        </a>
+        <!-- Backup Passwords -->
+        <a href="{% url 'dashboard:backup' %}" class="flex items-center p-2 rounded hover:bg-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <!-- Cloud Upload Icon -->
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V9a5 5 0 0110 0v7m-6 4h4m-4 0h-4" />
+          </svg>
+          Backup
+        </a>
+        <!-- Restore Passwords -->
+        <a href="{% url 'dashboard:restore_passwords' %}" class="flex items-center p-2 rounded hover:bg-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <!-- Cloud Download Icon -->
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8v7a5 5 0 0010 0V8m-5 8v4m0 0l-3-3m3 3l3-3" />
+          </svg>
+          Restore
+        </a>
+        <!-- Export Passwords -->
+        <a href="{% url 'dashboard:export_passwords' %}" class="flex items-center p-2 rounded hover:bg-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <!-- Download Icon -->
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v4h16v-4M12 12v8m0-8l-4 4m4-4l4 4" />
+          </svg>
+          Export
+        </a>
+        <!-- Profile -->
+        <a href="{% url 'dashboard:profile' %}" class="flex items-center p-2 rounded hover:bg-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <!-- User Icon -->
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A4 4 0 016 15.975V15a4 4 0 014-4h6a4 4 0 014 4v.975a4 4 0 01.879 1.829M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          Profile
+        </a>
+        <!-- Settings -->
+        <a href="{% url 'dashboard:settings' %}" class="flex items-center p-2 rounded hover:bg-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <!-- Cog Icon -->
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0a1.724 1.724 0 002.573 1.066c.81-.405 1.74.1 1.74.97v2.09a1.724 1.724 0 001.044 1.61c.862.36 1.227 1.33.88 2.13a1.724 1.724 0 000 1.726c.347.8-.018 1.77-.88 2.13a1.724 1.724 0 00-1.044 1.61v2.09c0 .87-.93 1.375-1.74.97a1.724 1.724 0 00-2.573 1.066c-.3.921-1.603.921-1.902 0a1.724 1.724 0 00-2.573-1.066c-.81.405-1.74-.1-1.74-.97v-2.09a1.724 1.724 0 00-1.044-1.61c-.862-.36-1.227-1.33-.88-2.13a1.724 1.724 0 000-1.726c-.347-.8.018-1.77.88-2.13a1.724 1.724 0 001.044-1.61V4.923c0-.87.93-1.375 1.74-.97a1.724 1.724 0 002.573-1.066z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          Settings
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col">
+      <!-- Top Bar -->
+      <header class="bg-white shadow h-16 flex items-center px-4 sm:px-6 lg:px-8">
+        <!-- Mobile Sidebar Toggle -->
+        <button class="sm:hidden text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200" onclick="toggleSidebar()">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <!-- Global Search (visible on larger screens) -->
+        <div class="flex-1 hidden sm:flex justify-center">
+          <form method="GET" action="{% url 'dashboard:home' %}" class="w-full max-w-md">
+            <div class="relative">
+              <input type="text" name="q" placeholder="Search passwords..." value="{{ search_query|default:'' }}" class="w-full border border-gray-300 rounded-full py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <button type="submit" class="absolute right-0 top-0 mt-2 mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
+        <!-- Top Bar Right: User Info & Actions -->
+        <div class="flex-1 text-right">
+          <span class="text-gray-600">Welcome, <strong>{{ user.username }}</strong></span>
+          <a href="{% url 'dashboard:profile' %}" class="ml-4 inline-flex items-center text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A4 4 0 016 15.975V15a4 4 0 014-4h6a4 4 0 014 4v.975a4 4 0 01.879 1.829M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            Profile
+          </a>
+          <a href="{% url 'accounts:logout' %}" class="ml-4 inline-flex items-center text-red-600 hover:text-red-800 focus:outline-none focus:ring-2 focus:ring-red-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7" />
+            </svg>
+            Logout
+          </a>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <main class="flex-1 p-4 sm:p-6 lg:p-8">
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </div>
+
+    <script>
+      // Function to toggle sidebar on mobile devices
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.toggle("-translate-x-full");
+      }
+
+      function generatePassword() {
+        fetch("{% url 'dashboard:generate_password' %}?length=16&symbols=true")
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("generated-password").value = data.password;
+          })
+          .catch((error) => console.error("Error generating password:", error));
+      }
+
+      function copyPassword() {
+        const passwordField = document.getElementById("generated-password");
+        if (passwordField.value) {
+          navigator.clipboard
+            .writeText(passwordField.value)
+            .then(() => {
+              const message = document.getElementById("copy-message");
+              message.classList.remove("hidden");
+              setTimeout(() => message.classList.add("hidden"), 2000); // Hide message after 2s
+            })
+            .catch((err) => console.error("Failed to copy password:", err));
+        }
+      }
+
+      function checkPasswordStrength() {
+        const password = document.getElementById("password-input").value;
+        const strengthBar = document.getElementById("strength-bar");
+        const strengthText = document.getElementById("strength-text");
+
+        let strength = 0;
+        if (password.length >= 8) strength++; // Length check
+        if (password.match(/[A-Z]/)) strength++; // Uppercase
+        if (password.match(/[a-z]/)) strength++; // Lowercase
+        if (password.match(/\d/)) strength++; // Number
+        if (password.match(/[@$!%*?&]/)) strength++; // Special character
+
+        const strengthLevels = [
+          "Weak",
+          "Fair",
+          "Good",
+          "Strong",
+          "Very Strong",
+        ];
+        const colors = [
+          "red-500",
+          "yellow-500",
+          "green-400",
+          "green-600",
+          "green-700",
+        ];
+
+        // Update bar width and color
+        strengthBar.style.width = strength * 20 + "%";
+        strengthBar.className = "h-2 rounded bg-" + colors[strength];
+
+        // Update text
+        strengthText.innerText = "Strength: " + strengthLevels[strength];
+      }
+
+      function sharePassword(passwordId) {
+        fetch(`/dashboard/share/${passwordId}/`)
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.link) {
+              navigator.clipboard.writeText(data.link);
+              alert("Shareable link copied to clipboard!");
+            } else {
+              alert("Error generating shareable link.");
+            }
+          });
+      }
+
+      function saveGeneratedPassword() {
+        const generatedPassword =
+          document.getElementById("generated-password").value;
+        if (generatedPassword) {
+          fetch("{% url 'dashboard:save_password' %}", {
+            method: "POST",
+            headers: {
+              "X-CSRFToken": "{{ csrf_token }}",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ password: generatedPassword }),
+          })
+            .then((response) => response.json())
+            .then((data) => alert(data.message))
+            .catch((error) => console.error("Error saving password:", error));
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+{% extends "public/base.html" %}
+{% block title %}Home | Cryptix{% endblock %}
+{% block content %}
+<div class="flex flex-col items-center text-center space-y-6">
+  <!-- Hero Section -->
+  <section class="w-full py-12">
+    <h1 class="text-4xl md:text-5xl font-bold">
+      Welcome to <span class="text-green-800">Cryptix</span>
+    </h1>
+    <p class="mt-4 text-lg text-gray-700">
+      Manage your credentials securely and easily.
+    </p>
+    <a href="{% url 'accounts:register' %}" class="mt-6 inline-block bg-blue-500 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition">
+      Get Started
+    </a>
+  </section>
+
+  <!-- Feature Cards Section -->
+  <section class="w-full">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      {% comment %}
+      You can loop through a list of features provided in context.
+      Each feature should have: image_url, title, description.
+      {% endcomment %}
+      {% for card in cards %}
+        {% include "public/components/card.html" with image_url=card.image_url title=card.title description=card.description %}
+      {% empty %}
+        <!-- Example cards if none are provided -->
+        {% include "public/components/card.html" with image_url="https://via.placeholder.com/150" title="Secure Storage" description="Your data is encrypted and secure." %}
+        {% include "public/components/card.html" with image_url="https://via.placeholder.com/150" title="Easy Backup" description="Backup and restore your passwords with ease." %}
+        {% include "public/components/card.html" with image_url="https://via.placeholder.com/150" title="User Friendly" description="An intuitive interface for managing credentials." %}
+      {% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock %}

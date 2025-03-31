@@ -1,0 +1,94 @@
+{% extends 'dashboard/base.html' %} {% block content %}
+
+<div>
+  <!-- Add New Password -->
+  <div class="">
+    <a
+      href="{% url 'dashboard:add_password' %}"
+      class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md"
+    >
+      Add New Password
+    </a>
+  </div>
+
+  <!-- Search Bar -->
+  <form method="GET" action="" class="mb-4">
+    <input
+      type="text"
+      name="q"
+      placeholder="Search passwords..."
+      class="p-2 border border-gray-300 rounded-lg"
+       value="{{ search_query|default:'' }}"
+    />
+    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">
+      Search
+    </button>
+  </form>
+
+  <!-- Dashboard Stats -->
+  <div class="grid grid-cols-3 gap-4 mt-4">
+    <div class="p-4 bg-blue-500 text-white rounded-lg">
+      <p class="text-xl font-semibold">{{ total_passwords }}</p>
+      <p>Total Passwords</p>
+    </div>
+    <div class="p-4 bg-yellow-500 text-white rounded-lg">
+      <p class="text-xl font-semibold">{{ weak_passwords }}</p>
+      <p>Weak Passwords</p>
+    </div>
+    <div class="p-4 bg-green-500 text-white rounded-lg">
+      <p class="text-xl font-semibold">{{ last_login }}</p>
+      <p>Last Login</p>
+    </div>
+  </div>
+
+  <!-- Passwords Table -->
+  <div
+    class="mt-10 bg-white shadow-md border-t-gray-500 border-t-2 rounded-lg overflow-hidden"
+  >
+    <table class="w-full text-left">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="p-3">Website/App</th>
+          <th class="p-3">Username</th>
+          <th class="p-3">Password</th>
+          <th class="p-3">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for password in passwords %}
+        <tr class="border-b">
+          <td class="p-3">{{ password.website }}</td>
+          <td class="p-3">{{ password.username }}</td>
+          <td class="p-3">
+            <span class="blur-sm hover:blur-none">{{ password.password }}</span>
+          </td>
+          <td class="p-3">
+            <a
+              href="{% url 'dashboard:edit_password' password.id %}"
+              class="text-blue-600"
+              >Edit</a
+            >
+            |
+            <a
+              href="{% url 'dashboard:delete_password' password.id %}"
+              class="text-red-600"
+              >Delete</a
+            >
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="4" class="text-center p-4">No passwords saved yet.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
+
+
+{% comment %} <td class="border p-2">
+    <button onclick="sharePassword({{ password.id }})" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Share</button>
+</td> {% endcomment %}

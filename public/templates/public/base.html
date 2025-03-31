@@ -1,0 +1,95 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Cryptix{% endblock %}</title>
+
+    {% comment %} preload {% endcomment %}
+    {% tailwind_preload_css %}
+
+    {% tailwind_css %}
+
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <!-- Header & Navigation -->
+    <header class="bg-gray-800 text-white">
+      <nav class="container mx-auto flex items-center justify-between p-4">
+        <div class="flex items-center space-x-4">
+          <a href="/" class="text-2xl font-bold hover:text-green-400"
+            >Cryptix</a
+          >
+          <div class="hidden md:flex space-x-4">
+            <a href="/" class="hover:text-green-400">Home</a>
+            <a href="{% url 'public:about' %}" class="hover:text-green-400"
+              >About</a
+            >
+          </div>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="{% url 'accounts:login' %}" class="hover:text-green-400"
+            >Login</a
+          >
+          <a href="{% url 'accounts:register' %}" class="hover:text-green-400"
+            >Register</a
+          >
+        </div>
+        <!-- Mobile Menu Button -->
+        <button id="menu-btn" class="block md:hidden focus:outline-none">
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </nav>
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-gray-700">
+        <div class="container mx-auto flex flex-col space-y-2 p-4">
+          <a href="/" class="hover:text-green-400">Home</a>
+          <a href="{% url 'public:about' %}" class="hover:text-green-400"
+            >About</a
+          >
+          <a href="{% url 'accounts:login' %}" class="hover:text-green-400"
+            >Login</a
+          >
+          <a href="{% url 'accounts:register' %}" class="hover:text-green-400"
+            >Register</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto p-6">
+      {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center p-4">
+      &copy; 2025 Cryptix. All rights reserved.
+    </footer>
+
+    <!-- Optional JS for Mobile Menu Toggle -->
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+    </script>
+
+    {% if debug %}
+    <script src="http://127.0.0.1:8000/__reload__/reload.js"></script>
+    {% endif %}
+  </body>
+</html>

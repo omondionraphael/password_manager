@@ -1,0 +1,16 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md text-center">
+  <h2 class="text-2xl font-bold mb-4">Backup Your Passwords</h2>
+  <p class="mb-6 text-gray-700">
+    Click the button below to download a secure backup of your passwords.
+  </p>
+  <a href="{% url 'dashboard:export_passwords' %}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+    Download Backup
+  </a>
+  <p class="mt-6 text-sm text-gray-500">
+    The backup file is a CSV file containing your Website, Username, and Encrypted Password.
+  </p>
+</div>
+{% endblock %}

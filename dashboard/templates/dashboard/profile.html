@@ -1,0 +1,32 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+<div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+  <h2 class="text-2xl font-bold mb-4">Your Profile</h2>
+  
+  <!-- User Info -->
+  <div class="mb-4">
+    <label class="block text-gray-700 font-bold">Username</label>
+    <p class="mt-1 p-2 border rounded bg-gray-50">{{ user.username }}</p>
+  </div>
+  
+  <div class="mb-4">
+    <label class="block text-gray-700 font-bold">Email</label>
+    <p class="mt-1 p-2 border rounded bg-gray-50">{{ user.email }}</p>
+  </div>
+  
+  <!-- Master Password Update -->
+  <div class="mb-4">
+    <a href="{% url 'dashboard:verify_master_password' %}" class="text-blue-600 hover:underline">
+      Change Master Password
+    </a>
+  </div>
+  
+  <!-- (Optional) Link for updating other profile details -->
+  <div class="mb-4">
+    <a href="{% url 'dashboard:home' %}" class="text-blue-600 hover:underline">
+      Edit Profile
+    </a>
+  </div>
+</div>
+{% endblock %}

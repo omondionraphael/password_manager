@@ -1,0 +1,16 @@
+{% load static %}
+<div class="bg-white rounded-lg shadow-md overflow-hidden">
+  {% if image_url %}
+    {% if image_url|slice:":4" == "http" %}
+      <!-- Absolute URL, use as is -->
+      <img src="{{ image_url }}" alt="{{ title }}" class="w-full h-40 object-cover">
+    {% else %}
+      <!-- Relative URL, load via static -->
+      <img src="{% static image_url %}" alt="{{ title }}" class="w-full h-40 object-cover">
+    {% endif %}
+  {% endif %}
+  <div class="p-4">
+    <h3 class="text-xl font-bold mb-2">{{ title }}</h3>
+    <p class="text-gray-700">{{ description }}</p>
+  </div>
+</div>

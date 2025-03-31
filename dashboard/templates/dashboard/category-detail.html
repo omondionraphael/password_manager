@@ -1,0 +1,25 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+  <h2 class="text-2xl font-bold mb-4">Category: {{ category.name }}</h2>
+  {% if category.description %}
+    <p class="text-gray-700 mb-4">{{ category.description }}</p>
+  {% endif %}
+  
+  <h3 class="text-xl font-semibold mb-2">Passwords in this Category</h3>
+  {% if passwords %}
+    <ul class="space-y-2">
+      {% for password in passwords %}
+        <li class="p-4 border rounded-lg hover:shadow transition">
+          <strong>{{ password.website }}</strong> - {{ password.username }}
+          <a href="{% url 'dashboard:edit_password' password.id %}" class="text-blue-500 ml-2">Edit</a>
+          <a href="{% url 'dashboard:confirm_delete' password.id %}" class="text-red-500 ml-2">Delete</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="text-gray-500">No passwords in this category.</p>
+  {% endif %}
+</div>
+{% endblock %}

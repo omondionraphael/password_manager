@@ -1,0 +1,33 @@
+{% load static tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />rm 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Cryptix{% endblock %}</title>
+    {% tailwind_css %}
+  </head>
+  <body>
+    <nav class="bg-gray-800 text-white p-4 flex justify-between">
+      <div>
+        <a href="/" class="mr-4">Home</a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'dashboard:home' %}" class="mr-4">Dashboard</a>
+        <a href="{% url 'accounts:logout' %}" class="mr-4 text-red-400">Logout</a>
+        {% else %}
+        <a href="{% url 'accounts:login' %}" class="mr-4">Login</a>
+        <a href="{% url 'accounts:register' %}" class="mr-4">Register</a>
+        {% endif %}
+      </div>
+      {% if user.is_authenticated %}
+      <div class="text-sm">Welcome, {{ user.username }}</div>
+      {% endif %}
+    </nav>
+
+    <!-- Page Content -->
+    <main class="flex-1 p-4 sm:p-6 lg:p-8">
+      {% block content %} {% endblock %}
+    </main>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+  <h2 class="text-2xl font-bold mb-4">Settings</h2>
+  
+  <!-- Settings Form -->
+  <form method="POST" action="">
+    {% csrf_token %}
+    
+    <!-- Dark Mode Toggle -->
+    <div class="mb-4 flex items-center">
+      <input type="checkbox" id="dark_mode" name="dark_mode" class="mr-2" {% if request.session.dark_mode %}checked{% endif %}>
+      <label for="dark_mode" class="text-gray-700">Enable Dark Mode</label>
+    </div>
+    
+    <!-- Email Notifications -->
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-1" for="email_notifications">
+        Email Notifications
+      </label>
+      <select id="email_notifications" name="email_notifications" class="w-full p-2 border rounded">
+        <option value="enabled" {% if request.session.email_notifications == "enabled" %}selected{% endif %}>Enabled</option>
+        <option value="disabled" {% if request.session.email_notifications == "disabled" %}selected{% endif %}>Disabled</option>
+      </select>
+    </div>
+    
+    <!-- Additional Settings can be added here -->
+    
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+      Save Settings
+    </button>
+  </form>
+</div>
+{% endblock %}
