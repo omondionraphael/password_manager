@@ -21,6 +21,7 @@ def validate_password_strength(password):
     if not re.search(r"[@$!%*?&]", password):
         raise ValidationError("Password must contain at least one special character.")
 
+# PasswordEntry Model
 class PasswordEntry(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     website = models.CharField(max_length=255)

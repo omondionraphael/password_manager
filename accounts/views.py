@@ -53,7 +53,7 @@ class CustomUserCreationForm(UserCreationForm):
             "password1": forms.PasswordInput(attrs={
                 "class": "w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500",
                 "placeholder": "Create a password",
-            }),
+            }), 
             "password2": forms.PasswordInput(attrs={
                 "class": "w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500",
                 "placeholder": "Confirm your password",

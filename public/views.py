@@ -10,4 +10,4 @@ def home(request):
     return render(request, 'public/home.html', {'cards': cards})
 
 def about(request):
-    return render(request, 'public/about.html')
+    return render(request, 'public/about.html') 

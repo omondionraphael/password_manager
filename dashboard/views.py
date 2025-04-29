@@ -21,11 +21,13 @@ def home(request):
     search_query = request.GET.get("q", "")
     passwords = PasswordEntry.objects.filter(user=request.user)
 
+    # search query for search password box
     if search_query:
         passwords = passwords.filter(
             Q(website__icontains=search_query) | Q(username__icontains=search_query)
         )
     
+
     context = {
         "total_passwords": passwords.count(),
         "weak_passwords": passwords.filter(strength="weak").count(),
@@ -37,10 +39,12 @@ def home(request):
 
     return render(request, 'dashboard/home.html', context)
 
+# get all passwords 
 @login_required
 def passwords(request):
     return render(request, 'dashboard/passwords.html')
 
+# show categories page
 @login_required
 def categories(request):
     # Retrieve all categories (you might filter them based on user if needed)
@@ -50,9 +54,11 @@ def categories(request):
         cat.password_count = cat.password_count()
     return render(request, 'dashboard/categories.html', {'categories': cats})
 
+
 @login_required
 def backup(request):
     return render(request, 'dashboard/backup.html')
+
 
 @login_required
 def view_profile(request):
@@ -66,6 +72,7 @@ def logout(request):
 def settings(request):
     return render(request, 'dashboard/settings.html')
 
+# 
 @login_required
 def add_password(request):
     if request.method == "POST":
