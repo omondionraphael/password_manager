@@ -28,6 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['password-manager-3gcp.onrender.com']
 
+NPM_BIN_PATH = "C:\\Program Files\\nodejs\\npm.cmd"
+
 # for django-tailwind
 INTERNAL_IPS = [
     "127.0.0.1",
