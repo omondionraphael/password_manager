@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-zyg(8uo*^0eaof)8#i2nm@!a*yyy%f+95312+pkx8ubrc9bbxe
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['password-manager-3gcp.onrender.com']
 
 # for django-tailwind
 INTERNAL_IPS = [
