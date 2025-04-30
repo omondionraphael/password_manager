@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from pathlib import Path
+from cryptography.fernet import Fernet
+
+FERNET_KEY = b""
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +29,11 @@ SECRET_KEY = 'django-insecure-zyg(8uo*^0eaof)8#i2nm@!a*yyy%f+95312+pkx8ubrc9bbxe
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['password-manager-3gcp.onrender.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'password-manager-3gcp.onrender.com']
+
+PASSWORD_ENCRYPTION_KEY = (
+    b"xFyxdYjgXwMt5r8XbZbxBg=="  # Use a secure key management system in production
+)
 
 NPM_BIN_PATH = "C:\\Program Files\\nodejs\\npm.cmd"
 
@@ -57,7 +64,7 @@ INSTALLED_APPS = [
     'django_otp.plugins.otp_totp',
     "django_otp.plugins.otp_email",
     "two_factor",
-
+    "widget_tweaks"
 ]
 
 MIDDLEWARE = [
