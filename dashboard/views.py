@@ -15,22 +15,22 @@ from django.utils.crypto import get_random_string
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 
-# Create your views here.
+# Create your views here/ home page after login 
 @login_required
-def home(request):
-    search_query = request.GET.get("q", "")
-    passwords = PasswordEntry.objects.filter(user=request.user)
+def home(request):#check authentication/if login, view execute normally
+    search_query = request.GET.get("q", "") # search query
+    passwords = PasswordEntry.objects.filter(user=request.user) #check password and request the user from user account
 
     if search_query:
         passwords = passwords.filter(
-            Q(website_icontains=search_query) | Q(username_icontains=search_query)
+            Q(website_icontains=search_query) | Q(username_icontains=search_query)#performs filtering/eg case sen
         )
 
     context = {
         "total_passwords": passwords.count(),
         "weak_passwords": passwords.filter(strength="weak").count(),
         "reused_passwords": passwords.filter(is_reused=True).count(),
-        "recent_passwords": passwords.order_by('-created_at')[:5],
+        "recent_passwords": passwords.order_by('-created_at')[:5], # the recent last 5
         "passwords": passwords,
         "search_query": search_query,  # Pass query to template
     }

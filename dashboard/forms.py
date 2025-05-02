@@ -21,6 +21,7 @@ class PasswordEntryForm(forms.ModelForm):
             attrs={
                 "placeholder": "≥8 chars, uppercase, digit, special",
                 "class": "border p-2 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500",
+                "id": "id_password",
             }
         ),
     )
@@ -41,7 +42,7 @@ class PasswordEntryForm(forms.ModelForm):
                 }
             ),
         }
-
+#password requirment 
     def clean_password(self):
         pw = self.cleaned_data.get("password", "")
         if len(pw) < 8:
